@@ -1,9 +1,9 @@
 CREATE OR REPLACE FUNCTION fetch_weekly_schedules(start_date DATE, end_date DATE)
 RETURNS TABLE (
-    groupID INT,
-    title VARCHAR(255),
-    startRecur DATE,
-    endRecur DATE,
+    scheduleID INT,
+    suiteName VARCHAR(255),
+    startDate DATE,
+    endDate DATE,
     daysOfWeek INT[],
     startTime TIME,
     endTime TIME,
@@ -14,10 +14,10 @@ RETURNS TABLE (
 BEGIN
     RETURN QUERY
     SELECT 
-        s.scheduleID AS groupID,
-        ts.suiteName AS title,
-        s.startDate AS startRecur,
-        s.endDate AS endRecur,
+        s.scheduleID,
+        ts.suiteName,
+        s.startDate,
+        s.endDate,
         s.daysOfWeek,
         s.startTime,
         s.endTime,

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
 import { isValidDate } from '@/utils/utils';
+import { Schedule, CalendarEvent } from '@/app/types';
 
 /**
  * Fetches weekly schedules for a given date range
@@ -40,10 +41,30 @@ export async function GET(req: Request) {
       throw error;
     }
 
+    const scheduledTests = data.map((schedule: Schedule) => {
+      let calendarEvent: CalendarEvent = {
+        title: schedule.suitename,
+        startRecur: new Date(`${schedule.startdate}T${schedule.starttime}`),
+        endRecur: new Date(`${schedule.enddate}T${schedule.endtime}`),  
+        daysOfWeek: schedule.daysofweek,
+        startTime: schedule.starttime,
+        endTime: schedule.endtime,
+      }; 
+      if (schedule.custominterval) {
+          calendarEvent['rrule'] = {
+            freq: 'daily',
+            interval: schedule.custominterval,
+            dtstart: `${schedule.startdate}T${schedule.starttime}`,
+          }
+      }
+      return calendarEvent;
+    })
+    
     // Return the fetched data as JSON
-    return NextResponse.json(data);
+    return NextResponse.json(scheduledTests);
   } catch (error: any) {
     // Handle any errors that occur during the fetch
+    console.error('Error fetching schedules:', error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
