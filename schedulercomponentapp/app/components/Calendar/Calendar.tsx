@@ -5,12 +5,11 @@ import rrulePlugin from '@fullcalendar/rrule';
 
 export default function CalendarPage() {
           return (
-            <div className='calendar-container'>
                 <FullCalendar
                         plugins={[timeGridPlugin, rrulePlugin]}
                         initialView="timeGridWeek"
                         events='/api/schedules'
-                        height="auto"
+                        height="100%"
                         eventColor="#E5EAFB"
                     headerToolbar={{
                         left: 'prev,next today',
@@ -23,6 +22,5 @@ export default function CalendarPage() {
                     selectMirror={true}
                     defaultTimedEventDuration="00:30"
                 />
-            </div>
     )
 }

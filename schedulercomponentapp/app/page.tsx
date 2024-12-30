@@ -1,14 +1,19 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import CalendarPage from './components/Calendar';
-
+import styles from "./page.module.css";
+import CalendarPage from "./components/Calendar/Calendar";
 
 export default function SchedulesPage() {
   return (
-    <div className="p-6">
-      <h1 className="text-xl font-bold mb-4">Scheduler</h1>
-      <CalendarPage />
+    <div className={styles.container}>
+      <div className={styles.leftPanel}>{/* Menu goes here */}</div>
+      <div className={styles.rightPanel}>
+        <div className={styles.topBar}></div>
+        <div className={styles.content}>
+          <div className={styles.heading}>Scheduled Suites</div>
+          <CalendarPage />
+        </div>
+      </div>
     </div>
   );
 }
