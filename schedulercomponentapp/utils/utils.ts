@@ -14,3 +14,15 @@ export function encodedRedirect(
 ) {
   return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
 }
+
+
+/**
+ * Checks if a given date string is a valid date.
+ *
+ * @param dateString - The date string to validate.
+ * @returns `true` if the date string is a valid date, otherwise `false`.
+ */
+export const isValidDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date instanceof Date && !isNaN(date.getTime());
+};
