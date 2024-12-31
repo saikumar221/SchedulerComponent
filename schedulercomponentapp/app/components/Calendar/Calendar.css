@@ -1,0 +1,110 @@
+.fc-direction-ltr .fc-timegrid-slot-label-frame {
+  font-family: Inter;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #717070;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border-radius: 8px;
+  border: 1px solid #ded9d6;
+}
+
+.fc-col-header-cell {
+  background-color: #f3f2f1;
+  height: 40px;
+  padding: 4px 16px 4px 16px;
+  gap: 8px;
+  border: 0px 0px 1px 0px;
+  opacity: 0px;
+  align-items: center;
+}
+.fc td {
+  vertical-align: top;
+}
+.fc th {
+  font-family: Inter;
+  color: #1b1919;
+  vertical-align: middle;
+  font-size: 18px;
+  font-weight: normal;
+  font-weight: 400;
+  line-height: 18px;
+  /* text-align: left; */
+  text-decoration-skip-ink: none;
+}
+
+.fc-theme-standard th {
+  border: none;
+  border-right: 1px solid #ded9d6;
+}
+
+.fc-theme-standard td {
+  border: none;
+  border: 1px solid #f3f2f1;
+  border-right: 1px solid #ded9d6;
+}
+
+.fc .fc-timegrid-slot-minor {
+  border: none;
+}
+
+.event-content {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+  width: fit-content;
+  overflow: hidden;
+  cursor: pointer;
+}
+.icon-size-12 {
+  width: 12px;
+  height: 12px;
+}
+
+.time {
+  display: flex;
+  padding-top: 4px;
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 12px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #0435dd;
+}
+
+.fc-event-main {
+  overflow: hidden;
+}
+
+.fc-toolbar-chunk {
+  display: flex;
+  align-items: center;
+}
+
+.fc-toolbar-chunk .fc-prev-button,
+.fc-toolbar-chunk .fc-next-button {
+  background: #ffffff;
+  color: black;
+  border: none;
+}
+
+.fc-toolbar-chunk .fc-toolbar-title {
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #1b1919;
+}
