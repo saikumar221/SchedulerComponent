@@ -70,3 +70,7 @@ CREATE TABLE TestLogs (
 ```
 
 --- 
+
+Questions:
+eventMaxStack how much?
+End date?

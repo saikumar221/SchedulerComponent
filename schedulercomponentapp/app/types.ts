@@ -26,3 +26,20 @@ export interface Schedule {
     frequency: string,
     custominterval: number | null,
 }
+
+export interface NewScheduleRecord {
+  suiteID: number;
+  startDate: string;
+  startTime: string;
+  endDate?: string;
+  endTime?: string;
+  status?: 'active' | 'paused' | 'cancelled';
+  frequency: 'Daily' | 'Weekly' | 'Custom';
+  customInterval?: number;
+  daysOfWeek?: number[];
+}
+
+export interface Suite {
+    suiteid: string;
+    suitename: string;
+  }

@@ -1,3 +1,4 @@
+import { NewScheduleRecord } from "@/app/types";
 import { redirect } from "next/navigation";
 
 /**
@@ -25,4 +26,8 @@ export function encodedRedirect(
 export const isValidDate = (dateString: string) => {
   const date = new Date(dateString);
   return date instanceof Date && !isNaN(date.getTime());
+};
+
+export const isValidScheduleData = (scheduleData: NewScheduleRecord) => {
+  return true;
 };
