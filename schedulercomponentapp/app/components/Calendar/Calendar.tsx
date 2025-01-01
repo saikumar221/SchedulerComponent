@@ -31,7 +31,13 @@ export default function CalendarPage() {
       <FullCalendar
         plugins={[listPlugin, timeGridPlugin, rrulePlugin]}
         initialView="timeGridWeek"
-        events="/api/schedules"
+        timeZone="local"
+        events={{
+          url: "/api/schedules",
+          extraParams: {
+            browserTimeZone: browserTimeZone,
+          }
+        }} 
         height="100%"
         eventColor="#E5EAFB"
         eventBorderColor="#0435DD80"

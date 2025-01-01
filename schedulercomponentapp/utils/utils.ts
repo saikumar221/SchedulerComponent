@@ -31,3 +31,18 @@ export const isValidDate = (dateString: string) => {
 export const isValidScheduleData = (scheduleData: NewScheduleRecord) => {
   return true;
 };
+
+export function convertUTCToTimezone(utcDate: Date | string, timeZone: string): string {
+  const date = new Date(utcDate);
+  const options: Intl.DateTimeFormatOptions = {
+    timeZone,
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false
+  };
+  return new Intl.DateTimeFormat('en-US', options).format(date);
+}

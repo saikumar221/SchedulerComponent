@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/utils/supabase/server';
-import { isValidDate, isValidScheduleData as isValidSchedule } from '@/utils/utils';
+import { convertUTCToTimezone, isValidDate, isValidScheduleData as isValidSchedule } from '@/utils/utils';
 import { Schedule, CalendarEvent, NewScheduleRecord } from '@/app/types';
 
 /**
@@ -13,6 +13,7 @@ export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const weekStart = searchParams.get('start');
   const weekEnd = searchParams.get('end');
+  const desiredTimeZone = searchParams.get('browserTimeZone') || 'UTC';
 
   // Check if both start and end dates are provided
   if (!weekStart || !weekEnd) {
@@ -42,22 +43,40 @@ export async function GET(req: Request) {
     }
 
     const scheduledTests = data.map((schedule: Schedule) => {
-      let calendarEvent: CalendarEvent = {
-        title: schedule.suitename,
-        startRecur: new Date(`${schedule.startdate}T${schedule.starttime}`),
-        endRecur: new Date(`${schedule.enddate}T${schedule.endtime}`),  
-        daysOfWeek: schedule.daysofweek,
-        startTime: schedule.starttime,
-        endTime: schedule.endtime,
-      }; 
-      if (schedule.custominterval) {
-          calendarEvent['rrule'] = {
-            freq: 'daily',
-            interval: schedule.custominterval,
-            dtstart: `${schedule.startdate}T${schedule.starttime}`,
+      if ((schedule.custominterval === null || schedule.custominterval === 0) && (!schedule.daysofweek || schedule.daysofweek.length === 0)) {
+        return {
+          title: schedule.suitename,
+          start: `${schedule.startdate}T${schedule.starttime}Z`, // UTC time
+          end: schedule.enddate?`${schedule.enddate}T${schedule.endtime}Z`:null, // UTC time
           }
       }
-      return calendarEvent;
+      if (schedule.custominterval) {
+        return {
+          title: schedule.suitename,
+          startRecur: `${schedule.startdate}T${schedule.starttime}Z`, // UTC time
+          endRecur: schedule.enddate?`${schedule.enddate}T${schedule.endtime}Z`:null, // UTC time
+          rrule: {
+            freq: 'daily',
+            interval: schedule.custominterval,
+            dtstart: `${schedule.startdate}T${schedule.starttime}Z`, // UTC time
+          }
+        }
+      }
+      else{
+        const endTime = new Date(`${schedule.enddate}T${schedule.endtime}Z`);
+        const convertedstartTime: string = convertUTCToTimezone(`${schedule.startdate}T${schedule.starttime}Z`, desiredTimeZone);
+        const dateObject: Date = new Date(convertedstartTime);
+        const timeOnly: string = dateObject.toLocaleTimeString('en-US', { hour12: false });
+
+        return {
+          title: schedule.suitename,
+          startRecur: `${schedule.startdate}T${schedule.starttime}Z`, // UTC time
+          endRecur: schedule.enddate?`${schedule.enddate}T${schedule.endtime}Z`:null, // UTC time
+          daysOfWeek: schedule.daysofweek,
+          startTime: timeOnly,
+          endTime: endTime,
+          }
+      }
     })
     
     // Return the fetched data as JSON
