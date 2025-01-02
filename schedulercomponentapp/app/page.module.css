@@ -4,7 +4,6 @@
   top: -460px;
   left: -1028px;
   gap: 0px;
-  opacity: 0px;
   display: flex;
   flex-direction: row;
 }
@@ -17,7 +16,6 @@
   padding: 2px 0px 0px 0px;
   gap: var(--spacing0);
   border: 0px 1px 0px 0px;
-  opacity: 0px;
 }
 
 .rightPanel {
@@ -25,7 +23,6 @@
   height: 1024px;
   left: 300px;
   gap: 0px;
-  opacity: 0px;
 }
 
 .topBar {
@@ -34,13 +31,11 @@
   height: 64px;
   padding: 2px 0px 0px 0px;
   gap: 0px;
-  opacity: 0px;
   border-bottom: 1px solid #ded9d6;
 }
 
 .heading {
   margin-bottom: 12px;
-  opacity: 0px;
   font-family: Inter;
   font-size: 30px;
   font-weight: 600;
@@ -56,6 +51,5 @@
   height: 890px;
   padding: 24px 36px 24px 36px;
   gap: 16px;
-  opacity: 0px;
   background: #ffffff;
 }
